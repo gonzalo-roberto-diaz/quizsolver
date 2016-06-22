@@ -1,7 +1,8 @@
 package com.radius.quizsolver.domain;
 
 /**
- * Created by gdiaz on 6/19/16.
+ * This class represent a (valid)  snapshot of the position of players, pieces, etc.
+ * The whole idea of this solver framework, is that a situation generates many other possible situations.
  */
 public abstract class Situation implements Cloneable {
     public Situation parent;

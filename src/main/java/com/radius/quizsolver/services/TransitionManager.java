@@ -11,6 +11,8 @@ import java.util.Set;
 
 /**
  * Created by gdiaz on 6/19/16.
+ * This class is basically a helper for Situation, that externalizes some methods in order to keep the Situation
+ * istances as flyweight as possible.
  */
 public abstract class TransitionManager <S extends Situation> {
     public Optional<S> hasWinner(Set<S> situations){

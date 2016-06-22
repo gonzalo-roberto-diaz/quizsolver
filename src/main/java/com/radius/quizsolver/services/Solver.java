@@ -9,6 +9,8 @@ import java.util.Set;
 
 /**
  * Created by gdiaz on 6/19/16.
+ * The main class of this solving framework. It consists of basically a single, recursive method that, for every source situation, evaluates
+ * all possible derivate situations, and identifies it any of them is a "winning" situation.
  */
 public abstract class Solver  <S extends Situation,  T extends TransitionManager<S>>{
     protected T tran;
