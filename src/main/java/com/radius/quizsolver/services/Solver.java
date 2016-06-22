@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Created by gdiaz on 6/19/16.
  */
-public class Solver  <S extends Situation,  T extends TransitionManager<S>>{
+public abstract class Solver  <S extends Situation,  T extends TransitionManager<S>>{
     protected T tran;
     protected Optional<List<S>> winnerPath = Optional.empty();
 

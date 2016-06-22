@@ -62,18 +62,35 @@ public class HanoiTransitionManagerTest {
         assertFalse(targets.contains(2));
     }
 
+    @Test
+    public void moveDisc(){
+        HanoiSituation sit = new HanoiSituation(0);
+        sit.getPin(0).push(4);
+        sit.getPin(0).push(3);
+        sit.getPin(1).push(2);
+        HanoiSituation newSit =  tran.moveDisc(sit, 0, 2);
+        assertEquals(newSit.getPin(0).size(), 1);
+        assertEquals(newSit.getPin(0).peek(), Integer.valueOf(4));
+        assertEquals(newSit.getPin(1).size(), 1);
+        assertEquals(newSit.getPin(1).peek(), Integer.valueOf(2));
+        assertEquals(newSit.getPin(2).size(), 1);
+        assertEquals(newSit.getPin(2).peek(), Integer.valueOf(3));
+    }
 
-//    @Test
-//    public void historykept(){
-//        WolfGooseCabaggeSituation original = createSituation();
-//        Set<WolfGooseCabaggeSituation> validResults = tran.validSituations(original);
-//        WolfGooseCabaggeSituation child = validResults.iterator().next();
-//        Set<WolfGooseCabaggeSituation> grandChildren = tran.validSituations(child);
-//        WolfGooseCabaggeSituation grandChild = grandChildren.iterator().next();
-//
-//        List<WolfGooseCabaggeSituation> grandChildHistory =  tran.getPastSituations(grandChild);
-//
-//        assertEquals(grandChildHistory.size(), 3);
-//    }
+    @Test
+    public void anotherMoveDisc(){
+        HanoiSituation sit = new HanoiSituation(0);
+        sit.getPin(0).push(4);
+        sit.getPin(0).push(3);
+        sit.getPin(1).push(2);
+        HanoiSituation newSit =  tran.moveDisc(sit, 1, 0);
+        assertEquals(newSit.getPin(0).size(), 3);
+        assertEquals(newSit.getPin(0).peek(), Integer.valueOf(2));
+        assertEquals(newSit.getPin(1).size(), 0);
+        assertEquals(newSit.getPin(2).size(), 0);
+    }
+
+
+
 
 }

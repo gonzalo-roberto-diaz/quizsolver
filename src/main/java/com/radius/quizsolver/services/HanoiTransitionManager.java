@@ -24,8 +24,21 @@ public class HanoiTransitionManager extends TransitionManager<HanoiSituation> {
 
     public  Set<HanoiSituation> validSituations(HanoiSituation original){
         Set<HanoiSituation> pastSituations = new HashSet<>(getPastSituations(original));
-
-        return pastSituations;
+        Set<HanoiSituation> result = new HashSet<>();
+        for (int i=0; i<3; i++){
+            if (original.getPin(i).empty()){
+                continue;
+            }
+            List<Integer> possibleDestinations = possibleTargetIndexes(original, i);
+            for (int destIndex = 0; destIndex<possibleDestinations.size(); destIndex++){
+                int destinationPin = possibleDestinations.get(destIndex);
+                HanoiSituation newSit = moveDisc(original, i, destinationPin);
+                if (newSit.isValid() && !pastSituations.contains(newSit)) {
+                    result.add(newSit);
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -56,62 +69,22 @@ public class HanoiTransitionManager extends TransitionManager<HanoiSituation> {
         return targetIndexes;
     }
 
-
-    protected TorchBridgeSituation createMovingLeftToRight(TorchBridgeSituation original, Set<TorchPeople> movingSubSet){
-        TorchBridgeSituation newSit = (TorchBridgeSituation) original.clone();
-        newSit.leftBank.removeAll(movingSubSet);
-        newSit.rightBank.addAll(movingSubSet);
-        double subsetCost = movingSubSet.stream().mapToDouble(TorchPeople::getMinutes).reduce(0, Double::max);
-        newSit.setCost(subsetCost);
-        newSit.parent = original;
-        return newSit;
+    protected HanoiSituation moveDisc(HanoiSituation original, int originPin, int destinationPin){
+        HanoiSituation result = (HanoiSituation) original.clone();
+        Integer disc = result.getPin(originPin).pop();
+        result.getPin(destinationPin).push(disc);
+        result.parent = original;
+        return result;
     }
 
 
 
-    protected TorchBridgeSituation createMovingRightToLeft(TorchBridgeSituation original, Set<TorchPeople> movingSubSet){
-        TorchBridgeSituation newSit = (TorchBridgeSituation) original.clone();
-        newSit.rightBank.removeAll(movingSubSet);
-        newSit.leftBank.addAll(movingSubSet);
-        double subsetCost = movingSubSet.stream().mapToDouble(TorchPeople::getMinutes).reduce(0, Double::max);
-        newSit.setCost(subsetCost);
-        newSit.parent = original;
-        return newSit;
-    }
 
 
-    protected Set<Set<TorchPeople>> allSubsetsOfSize(Set<TorchPeople> original, int size){
-        Set<Set<TorchPeople>> ret = new HashSet<>();
-
-        ICombinatoricsVector<TorchPeople> originalVector = Factory.createVector(original);
-        Generator<TorchPeople> gen = Factory.createSimpleCombinationGenerator(originalVector, size);
-        for (ICombinatoricsVector<TorchPeople> perm : gen) {
-            Set<TorchPeople> set = new HashSet<>(perm.getVector());
-            ret.add(set);
-        }
-
-        return ret;
-    }
 
 
-    protected  Set<Set<TorchPeople>> subsetsSize2to3ContainingLamp(Set<TorchPeople> bank){
-        Set<Set<TorchPeople>> ret = new HashSet<>();
 
-        Set<TorchPeople> allButLamp = new HashSet<>(bank);
-        allButLamp.remove(TorchPeople.LAMP);
 
-        Set<Set<TorchPeople>> allSize1 = allSubsetsOfSize(allButLamp, 1);
-        Set<Set<TorchPeople>> allSize2 = allSubsetsOfSize(allButLamp, 2);
-        //Set<Set<TorchPeople>> allSize3 = allSubsetsOfSize(allButLamp, 3);
-
-        allSize2.addAll(allSize1);
-
-        Set<Set<TorchPeople>> allSubsets = allSize2;
-
-        allSubsets.forEach(set -> set.add(TorchPeople.LAMP));
-
-        return allSubsets;
-    }
 
     public double calculateCost(List<HanoiSituation> history){
         return history.size();

@@ -52,13 +52,13 @@ public class HanoiSituation extends  Situation{
 
     @Override
     public boolean isWinning() {
-        return pins[3].size() == this.amountOfPieces;
+        return pins[2].size() == this.amountOfPieces;
     }
 
     @Override
     public boolean isValid() {
         for (Stack<Integer> pin: this.pins){
-            if  (!Ordering.natural().nullsLast().isOrdered(pin)){
+            if  (!Ordering.natural().reverse().isOrdered(pin)){
                 return false;
             }
         }
@@ -67,10 +67,11 @@ public class HanoiSituation extends  Situation{
 
     @Override
     public Object clone() {
-        HanoiSituation sit = new HanoiSituation(this.amountOfPieces);
+        HanoiSituation sit = new HanoiSituation(0);
         for (int i=0; i<3; i++){
             transferStack(this.getPin(i), sit.getPin(i));
         }
+        sit.amountOfPieces = this.amountOfPieces;
         return sit;
     }
 
