@@ -1,6 +1,9 @@
 package com.radius.quizsolver.services.solvers;
 
 import com.radius.quizsolver.domain.situations.HanoiSituation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,16 +16,13 @@ import java.util.Stack;
  */
 public class HanoiSolver extends Solver<HanoiSituation> {
 
-
-
-
-
-
-
+    final static Logger logger = LoggerFactory.getLogger(HanoiSolver.class);
 
 
     public Set<HanoiSituation> validSituations(HanoiSituation original){
         Set<HanoiSituation> pastSituations = new HashSet<>(getPastSituations(original));
+        //logger.info("analyzing a situation with {} past ones", pastSituations.size());
+
         Set<HanoiSituation> result = new HashSet<>();
         for (int i=0; i<3; i++){
             if (original.getPin(i).empty()){

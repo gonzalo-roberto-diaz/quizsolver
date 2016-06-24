@@ -48,6 +48,11 @@ public abstract class Solver  <S extends Situation>{
 
     protected Optional<Double> maximumCost = Optional.empty();
 
+    public void setWinnerPath(Optional<List<S>> winnerPath) {
+        this.winnerPath = winnerPath;
+        this.winnerCost = calculateCost(this.winnerPath.get());
+    }
+
     public Optional<List<S>> getWinnerPath(){
         return winnerPath;
     }
@@ -69,8 +74,8 @@ public abstract class Solver  <S extends Situation>{
             S prospectiveWinSituation = optProspectiveWinSituation.get();
             List<S> prospectiveWinPath = getPastSituations(prospectiveWinSituation);
             double prospectiveWinCost = calculateCost(prospectiveWinPath);
-            if (!winnerPath.isPresent() || calculateCost(winnerPath.get()) > prospectiveWinCost ){
-                winnerPath = Optional.of(prospectiveWinPath);
+            if (!winnerPath.isPresent() || getWinnerCost() > prospectiveWinCost ){
+                setWinnerPath(Optional.of(prospectiveWinPath));
             }
             return;
         }else {

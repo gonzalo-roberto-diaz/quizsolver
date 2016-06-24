@@ -31,14 +31,6 @@ public class HanoiSolverTest {
     }
 
 
-    private WolfGooseCabaggeSituation createSituation(){
-        WolfGooseCabaggeSituation sit = new WolfGooseCabaggeSituation();
-        sit.leftBank = new HashSet<>();
-        sit.rightBank = new HashSet<>();
-        sit.leftBank.addAll(Arrays.asList(Pieces.CABBAGE, Pieces.WOLF));
-        sit.rightBank.addAll(Arrays.asList(Pieces.FARMER, Pieces.GOOSE));
-        return sit;
-    }
 
     @Test
     public void getTwoTargetPins(){
