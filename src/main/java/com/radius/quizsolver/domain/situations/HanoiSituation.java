@@ -1,11 +1,9 @@
-package com.radius.quizsolver.domain;
+package com.radius.quizsolver.domain.situations;
 
 import com.google.common.collect.Ordering;
-import com.radius.quizsolver.domain.enums.TorchPeople;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.IntStream;
@@ -13,7 +11,7 @@ import java.util.stream.IntStream;
 /**
  * Created by gdiaz on 6/21/16.
  */
-public class HanoiSituation extends  Situation{
+public class HanoiSituation extends Situation {
 
     private double cost;
 

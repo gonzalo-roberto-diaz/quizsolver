@@ -1,7 +1,7 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.solvers;
 
-import com.radius.quizsolver.domain.Situation;
-import com.radius.quizsolver.domain.WolfGooseCabaggeSituation;
+import com.radius.quizsolver.domain.situations.Situation;
+import com.radius.quizsolver.services.transitionmanagers.TransitionManager;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +13,19 @@ import java.util.Set;
  * all possible derivate situations, and identifies it any of them is a "winning" situation.
  */
 public abstract class Solver  <S extends Situation,  T extends TransitionManager<S>>{
+
+    public T getTran() {
+        return tran;
+    }
+
     protected T tran;
     protected Optional<List<S>> winnerPath = Optional.empty();
 
     protected Optional<Double> maximumCost = Optional.empty();
+
+    public Optional<List<S>> getWinnerPath(){
+        return winnerPath;
+    }
 
 
 

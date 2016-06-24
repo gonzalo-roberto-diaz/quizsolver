@@ -1,11 +1,6 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.transitionmanagers;
 
-import com.radius.quizsolver.domain.HanoiSituation;
-import com.radius.quizsolver.domain.TorchBridgeSituation;
-import com.radius.quizsolver.domain.enums.TorchPeople;
-import org.paukov.combinatorics.Factory;
-import org.paukov.combinatorics.Generator;
-import org.paukov.combinatorics.ICombinatoricsVector;
+import com.radius.quizsolver.domain.situations.HanoiSituation;
 
 import java.util.ArrayList;
 import java.util.HashSet;

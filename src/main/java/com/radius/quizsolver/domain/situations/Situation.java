@@ -1,4 +1,4 @@
-package com.radius.quizsolver.domain;
+package com.radius.quizsolver.domain.situations;
 
 /**
  * This class represent a (valid)  snapshot of the position of players, pieces, etc.

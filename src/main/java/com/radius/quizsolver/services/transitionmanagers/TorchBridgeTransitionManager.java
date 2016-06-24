@@ -1,6 +1,6 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.transitionmanagers;
 
-import com.radius.quizsolver.domain.TorchBridgeSituation;
+import com.radius.quizsolver.domain.situations.TorchBridgeSituation;
 import com.radius.quizsolver.domain.enums.TorchPeople;
 import org.paukov.combinatorics.Factory;
 import org.paukov.combinatorics.Generator;

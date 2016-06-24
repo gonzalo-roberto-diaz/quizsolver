@@ -1,7 +1,8 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.transitionmanagers;
 
-import com.radius.quizsolver.domain.WolfGooseCabaggeSituation;
+import com.radius.quizsolver.domain.situations.WolfGooseCabaggeSituation;
 import com.radius.quizsolver.domain.enums.Pieces;
+import com.radius.quizsolver.services.transitionmanagers.WolfGooseCabbageTransitionManager;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;

@@ -1,10 +1,11 @@
-package com.radius.quizsolver.domain;
+package com.radius.quizsolver.domain.situations;
 
 import com.radius.quizsolver.domain.enums.Pieces;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
+import com.radius.quizsolver.domain.situations.WolfGooseCabaggeSituation;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 

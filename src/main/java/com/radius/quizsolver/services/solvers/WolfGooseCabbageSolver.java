@@ -1,10 +1,6 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.solvers;
 
-import com.radius.quizsolver.domain.WolfGooseCabaggeSituation;
-import com.radius.quizsolver.domain.enums.Pieces;
-
-import java.util.Arrays;
-import java.util.HashSet;
+import com.radius.quizsolver.services.transitionmanagers.WolfGooseCabbageTransitionManager;
 
 /**
  * Created by gdiaz on 6/18/16.

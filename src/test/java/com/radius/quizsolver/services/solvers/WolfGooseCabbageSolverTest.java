@@ -1,9 +1,7 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.solvers;
 
-import com.radius.quizsolver.domain.TorchBridgeSituation;
-import com.radius.quizsolver.domain.WolfGooseCabaggeSituation;
+import com.radius.quizsolver.domain.situations.WolfGooseCabaggeSituation;
 import com.radius.quizsolver.domain.enums.Pieces;
-import com.radius.quizsolver.domain.enums.TorchPeople;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -26,8 +24,8 @@ public class WolfGooseCabbageSolverTest {
         sit.leftBank.addAll(Arrays.asList(Pieces.values()));
 
         sol.process(sit);
-        assertNotNull(sol.winnerPath);
-        sol.tran.printHistory((List<WolfGooseCabaggeSituation>) sol.winnerPath.get());
+        assertNotNull(sol.getWinnerPath());
+        sol.getTran().printHistory((List<WolfGooseCabaggeSituation>) sol.getWinnerPath().get());
 
     }
 }

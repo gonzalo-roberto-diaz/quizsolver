@@ -1,4 +1,4 @@
-package com.radius.quizsolver.domain;
+package com.radius.quizsolver.domain.situations;
 
 import com.radius.quizsolver.domain.enums.TorchPeople;
 

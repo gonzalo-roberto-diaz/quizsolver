@@ -1,9 +1,7 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.transitionmanagers;
 
-import com.radius.quizsolver.domain.Situation;
-import com.radius.quizsolver.domain.WolfGooseCabaggeSituation;
+import com.radius.quizsolver.domain.situations.Situation;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;

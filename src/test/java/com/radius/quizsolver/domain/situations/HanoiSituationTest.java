@@ -1,5 +1,6 @@
-package com.radius.quizsolver.domain;
+package com.radius.quizsolver.domain.situations;
 
+import com.radius.quizsolver.domain.situations.HanoiSituation;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

@@ -1,13 +1,12 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.solvers;
 
-import com.radius.quizsolver.domain.TorchBridgeSituation;
+import com.radius.quizsolver.domain.situations.TorchBridgeSituation;
 import com.radius.quizsolver.domain.enums.TorchPeople;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -26,8 +25,8 @@ public class TorchBridgeSolverTest {
 
 
         sol.process(sit);
-        assertNotNull(sol.winnerPath);
-        sol.tran.printHistory((List<TorchBridgeSituation>) sol.winnerPath.get());
+        assertNotNull(sol.getWinnerPath());
+        sol.getTran().printHistory((List<TorchBridgeSituation>) sol.getWinnerPath().get());
 
     }
 }

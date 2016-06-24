@@ -1,6 +1,6 @@
-package com.radius.quizsolver.services;
+package com.radius.quizsolver.services.solvers;
 
-import java.util.Optional;
+import com.radius.quizsolver.services.transitionmanagers.HanoiTransitionManager;
 
 /**
  * Created by gdiaz on 6/18/16.
