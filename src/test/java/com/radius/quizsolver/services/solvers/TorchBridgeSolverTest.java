@@ -26,7 +26,7 @@ public class TorchBridgeSolverTest {
 
         sol.process(sit);
         assertNotNull(sol.getWinnerPath());
-        sol.getTran().printHistory((List<TorchBridgeSituation>) sol.getWinnerPath().get());
+        sol.printHistory((List<TorchBridgeSituation>) sol.getWinnerPath().get());
 
     }
 }
