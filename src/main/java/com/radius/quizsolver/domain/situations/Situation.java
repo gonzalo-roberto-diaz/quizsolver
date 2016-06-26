@@ -7,6 +7,18 @@ package com.radius.quizsolver.domain.situations;
 public abstract class Situation implements Cloneable {
     public Situation parent;
 
+    private double cost;
+
+    public double getHistoryCost() {
+        return historyCost;
+    }
+
+    public void setHistoryCost(double historyCost) {
+        this.historyCost = historyCost;
+    }
+
+    private double historyCost;
+
     public abstract boolean isWinning();
 
     public abstract boolean isValid();
@@ -19,7 +31,13 @@ public abstract class Situation implements Cloneable {
 
     public abstract boolean equals(Object situation);
 
-    public abstract double getCost();
 
-    public abstract void setCost(double value);
+    public double getCost() {
+        return cost;
+    }
+
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
 }

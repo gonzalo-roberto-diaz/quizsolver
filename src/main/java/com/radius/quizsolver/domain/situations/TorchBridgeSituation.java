@@ -14,18 +14,6 @@ public class TorchBridgeSituation extends Situation {
     public Set<TorchPeople> rightBank;
 
     @Override
-    public double getCost() {
-        return cost;
-    }
-
-    @Override
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
-    private double cost;
-
-    @Override
     public boolean isWinning() {
         return rightBank.containsAll(Arrays.asList(TorchPeople.values()));
     }

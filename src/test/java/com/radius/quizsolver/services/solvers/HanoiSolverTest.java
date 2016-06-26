@@ -22,7 +22,7 @@ public class HanoiSolverTest {
     @Test
     public void solveQuiz(){
         HanoiSolver sol = new HanoiSolver();
-        HanoiSituation sit = new HanoiSituation(4);
+        HanoiSituation sit = new HanoiSituation(5);
 
         sol.process(sit);
         assertNotNull(sol.getWinnerPath());

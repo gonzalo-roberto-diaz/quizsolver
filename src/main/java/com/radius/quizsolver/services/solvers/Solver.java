@@ -1,6 +1,9 @@
 package com.radius.quizsolver.services.solvers;
 
 import com.radius.quizsolver.domain.situations.Situation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +15,11 @@ import java.util.Set;
  * all possible derivate situations, and identifies it any of them is a "winning" situation.
  */
 public abstract class Solver  <S extends Situation>{
+
+    final static Logger logger = LoggerFactory.getLogger(HanoiSolver.class);
+
+    //for debugging purposes
+    protected int situationsAnalized = 1;
 
     public Optional<S> hasWinner(Set<S> situations){
         return situations.stream().filter(p->p.isWinning()).findAny();
@@ -69,26 +77,47 @@ public abstract class Solver  <S extends Situation>{
 
     public void process(S source){
         Set<S> derivates = validSituations(source);
+//        situationsAnalized += derivates.size();
+//        if (situationsAnalized == 1 || situationsAnalized % 10000 == 0){
+//            logger.info("derivatesSize={} total={} situations analyzed", derivates.size(), situationsAnalized);
+//        }
         Optional<S> optProspectiveWinSituation = hasWinner(derivates);
         if (optProspectiveWinSituation.isPresent()){
             S prospectiveWinSituation = optProspectiveWinSituation.get();
-            List<S> prospectiveWinPath = getPastSituations(prospectiveWinSituation);
-            double prospectiveWinCost = calculateCost(prospectiveWinPath);
+            double prospectiveWinCost = prospectiveWinSituation.getHistoryCost(); // calculateCost(prospectiveWinPath);
             if (!winnerPath.isPresent() || getWinnerCost() > prospectiveWinCost ){
+                List<S> prospectiveWinPath = getPastSituations(prospectiveWinSituation);
+                logger.info("found a winner size={}", prospectiveWinPath.size());
                 setWinnerPath(Optional.of(prospectiveWinPath));
             }
             return;
         }else {
-            derivates.forEach(s -> {
-                List<S> historyS = getPastSituations(s);
-                double historyCost = calculateCost(historyS);
-                boolean winnerPathCondition = !winnerPath.isPresent()
-                        || historyCost < calculateCost(winnerPath.get());
-                boolean maximumCostCondition  = !maximumCost.isPresent() || historyCost <= maximumCost.get();
+            derivates.stream().forEach(s -> {
+                boolean noWinnerPath = !winnerPath.isPresent();
+                double historyCost = s.getHistoryCost();
 
-                if (winnerPathCondition && maximumCostCondition) {
-                    process(s);
+                //our path is already longer/more expensive than the winner path
+                if (!noWinnerPath && historyCost > getWinnerCost()){
+                    return;
                 }
+
+                //our path is more expensive than the maximum allowed cost
+                if (maximumCost.isPresent() && historyCost> maximumCost.get()){
+                    return;
+                }
+
+                //there is an "equal",  cheaper alternative already in the winner path
+                if (!noWinnerPath && winnerPath.get().contains(s)){
+                  S equalFromPath = winnerPath.get().stream().filter(ws -> ws.equals(s)).findFirst().get();
+                  if (equalFromPath.getHistoryCost() <= s.getHistoryCost()){
+                      //logger.info("eliminating because there is a cheaper item in the winner path");
+                      return;
+                  }
+                }
+
+
+                    process(s);
+
             });
         }
 

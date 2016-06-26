@@ -66,6 +66,7 @@ public class TorchBridgeSolver extends Solver<TorchBridgeSituation> {
         newSit.rightBank.addAll(movingSubSet);
         double subsetCost = movingSubSet.stream().mapToDouble(TorchPeople::getMinutes).reduce(0, Double::max);
         newSit.setCost(subsetCost);
+        newSit.setHistoryCost(original.getHistoryCost() + subsetCost);
         newSit.parent = original;
         return newSit;
     }
@@ -78,6 +79,7 @@ public class TorchBridgeSolver extends Solver<TorchBridgeSituation> {
         newSit.leftBank.addAll(movingSubSet);
         double subsetCost = movingSubSet.stream().mapToDouble(TorchPeople::getMinutes).reduce(0, Double::max);
         newSit.setCost(subsetCost);
+        newSit.setHistoryCost(original.getHistoryCost() + subsetCost);
         newSit.parent = original;
         return newSit;
     }

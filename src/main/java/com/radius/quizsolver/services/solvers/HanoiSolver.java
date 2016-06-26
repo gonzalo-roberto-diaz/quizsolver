@@ -73,6 +73,9 @@ public class HanoiSolver extends Solver<HanoiSituation> {
         Integer disc = result.getPin(originPin).pop();
         result.getPin(destinationPin).push(disc);
         result.parent = original;
+        result.setCost(1.0);
+        result.setHistoryCost(original.getHistoryCost() + 1.0);
+        result.recalculateStringValue();
         return result;
     }
 

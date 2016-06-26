@@ -13,7 +13,11 @@ import java.util.stream.IntStream;
  */
 public class HanoiSituation extends Situation {
 
-    private double cost;
+
+    /**
+     * a stored string value for quick comparisons
+     */
+    private String stringValue;
 
     private Stack<Integer> pins[] = new Stack[3];
 
@@ -23,6 +27,7 @@ public class HanoiSituation extends Situation {
 
     public void setPin(int index,  Stack<Integer> pin) {
         this.pins[index] = pin;
+        recalculateStringValue();
     }
 
     public int getAmountOfPieces() {
@@ -45,6 +50,11 @@ public class HanoiSituation extends Situation {
         }
         this.amountOfPieces = amountOfPieces;
         IntStream.range(0,amountOfPieces).forEach(val ->  pins[0].add(amountOfPieces - val));
+        recalculateStringValue();
+    }
+
+    public void recalculateStringValue(){
+        stringValue = toString();
     }
 
 
@@ -70,6 +80,7 @@ public class HanoiSituation extends Situation {
             transferStack(this.getPin(i), sit.getPin(i));
         }
         sit.amountOfPieces = this.amountOfPieces;
+        sit.recalculateStringValue();
         return sit;
     }
 
@@ -93,11 +104,15 @@ public class HanoiSituation extends Situation {
 
     @Override
     public int hashCode() {
-        return this.toString().hashCode();
+        return stringValue.hashCode();
     }
 
-    @Override
-    public boolean equals(Object situation) {
+    /**
+     * proper, object-oriented equality
+     * @param situation
+     * @return
+     */
+    public boolean equals2(Object situation) {
         if (situation == null){
             return false;
         }else if (!(situation instanceof HanoiSituation )){
@@ -117,12 +132,16 @@ public class HanoiSituation extends Situation {
     }
 
     @Override
-    public double getCost() {
-        return cost;
+    public boolean equals(Object situation) {
+        if (situation == null){
+            return false;
+        }else if (!(situation instanceof HanoiSituation )){
+            return false;
+        }else{
+            HanoiSituation sit = (HanoiSituation) situation;
+            return sit.stringValue.equals(this.stringValue);
+        }
     }
 
-    @Override
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
+
 }

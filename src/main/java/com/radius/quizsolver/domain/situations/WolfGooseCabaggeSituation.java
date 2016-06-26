@@ -15,18 +15,6 @@ public class WolfGooseCabaggeSituation extends Situation {
     public Set<Pieces> rightBank;
 
     @Override
-    public double getCost() {
-        return cost;
-    }
-
-    @Override
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
-    private double cost;
-
-    @Override
     public boolean isWinning() {
         return rightBank.containsAll(Arrays.asList(Pieces.values()));
     }

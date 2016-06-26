@@ -49,6 +49,8 @@ public class WolfGooseCabbageSolver extends Solver<WolfGooseCabaggeSituation> {
         newSit.leftBank.removeAll(movingSubSet);
         newSit.rightBank.addAll(movingSubSet);
         newSit.parent = original;
+        newSit.setCost(1.0);
+        newSit.setHistoryCost(original.getHistoryCost() + 1.0);
         return newSit;
     }
 
@@ -57,6 +59,8 @@ public class WolfGooseCabbageSolver extends Solver<WolfGooseCabaggeSituation> {
         newSit.rightBank.removeAll(movingSubSet);
         newSit.leftBank.addAll(movingSubSet);
         newSit.parent = original;
+        newSit.setCost(1.0);
+        newSit.setHistoryCost(original.getHistoryCost() + 1.0);
         return newSit;
     }
 
